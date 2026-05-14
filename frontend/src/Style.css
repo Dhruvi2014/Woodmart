@@ -541,3 +541,289 @@
     }
 
 }
+
+.bestseller-section {
+    padding: 35px 18px;
+    background: #fff;
+    overflow: hidden;
+}
+
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.top-header h1 {
+    font-size: 35px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.top-header h1 span {
+    color: #b4649d;
+}
+
+.category-tabs {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.category-tabs button {
+    border: none;
+    background: #f2f2f2;
+    padding: 14px 34px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    transition: 0.3s;
+}
+
+.category-tabs .active-tab {
+    background: #4a37eb;
+    color: #fff;
+}
+
+
+.product-card {
+    border: 1px solid #e6e6e6;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    transition: 0.4s;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+}
+
+
+.product-image {
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 220px;
+    object-fit: contain;
+    transition: 0.4s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.03);
+}
+
+.hover-icons {
+    position: absolute;
+    top: 24px;
+    right: -70px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: 0.4s;
+    z-index: 2;
+}
+
+.product-card:hover .hover-icons {
+    right: 18px;
+}
+
+.icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.icon-box:hover {
+    background: #4a37eb;
+    color: #fff;
+}
+
+.icon-box i {
+    font-size: 18px;
+}
+
+
+.product-content {
+    padding: 0 20px 24px;
+}
+
+.product-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-top span {
+    font-size: 17px;
+    color: #9f9f9f;
+}
+
+.rating {
+    font-size: 17px;
+    color: #9f9f9f;
+}
+
+.rating i {
+    color: #ffb400;
+    margin-left: 5px;
+}
+
+.product-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 18px;
+}
+
+
+.color-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #ececec;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.color-circle:hover {
+    transform: scale(1.1);
+}
+
+
+.storage-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.storage-wrapper button {
+    border: none;
+    background: #f5f5f5;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #7d7d7d;
+    font-weight: 600;
+}
+
+
+.product-bottom {
+    border-top: 1px solid #ececec;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-bottom h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #4a37eb;
+    margin: 0;
+}
+
+.cart-icon {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-icon i {
+    font-size: 24px;
+    color: #222;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+
+@media(max-width: 1400px){
+
+    .top-header h1{
+        font-size: 50px;
+    }
+
+}
+
+@media(max-width: 992px){
+
+    .top-header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-header h1{
+        font-size: 42px;
+    }
+
+    .category-tabs button{
+        font-size: 16px;
+        padding: 12px 22px;
+    }
+
+    .product-image{
+        height: 300px;
+    }
+
+}
+
+@media(max-width: 576px){
+
+    .bestseller-section{
+        padding: 25px 10px;
+    }
+
+    .top-header h1{
+        font-size: 34px;
+    }
+
+    .product-content h3{
+        font-size: 18px;
+    }
+
+    .category-tabs{
+        gap: 10px;
+    }
+
+    .category-tabs button{
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .product-bottom h2{
+        font-size: 18px;
+    }
+
+}

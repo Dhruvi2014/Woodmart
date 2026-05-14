@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Style.css";
+import axios from "axios";
 
 import Carousel from "react-bootstrap/Carousel";
 
@@ -8,8 +9,60 @@ import slide2 from "../assets/home2.png";
 import slide3 from "../assets/home3.png";
 import hotdeal from "../assets/home4.png";
 
+import iphone15 from "../assets/phone1.webp";
+import iphone15plus from "../assets/phone2.webp";
+import iphone15pro from "../assets/phone3.webp";
+import iphone15promax from "../assets/phone4.jpg";
+import iphone17 from "../assets/phone5.webp";
+import iphone17pro from "../assets/phone6.webp";
+
+import phone7 from "../assets/phone7.webp";
+import phone8 from "../assets/phone8.webp";
+import phone9 from "../assets/phone9.webp";
+import phone10 from "../assets/phone10.webp";
+import phone11 from "../assets/phone11.jpg";
+import phone12 from "../assets/phone12.jpg";
+
 const Home = () => {
+     const [products, setProducts] = useState([]);
+
+
+  const imageMap = {
+    "phone1.webp": iphone15,
+    "phone2.webp": iphone15plus,
+    "phone3.webp": iphone15pro,
+    "phone4.jpg": iphone15promax,
+    "phone5.webp": iphone17,
+    "phone6.webp": iphone17pro,
+    "phone7.webp": phone7,
+    "phone8.webp": phone8,
+    "phone9.webp": phone9,  
+    "phone10.webp": phone10,
+    "phone11.jpg": phone11,
+    "phone12.jpg": phone12,
+  };
+
+
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+
+      const res = await axios.get(
+        "http://localhost:5000/api/products"
+      );
+
+      setProducts(res.data.products);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
     return (
+        <>
         <div className="hero-section container-fluid">
 
             <div className="row g-4">
@@ -191,6 +244,183 @@ const Home = () => {
             </div>
 
         </div>
+
+
+        <section className="bestseller-section">
+
+      <div className="container-fluid">
+
+
+        <div className="top-header">
+
+          <h1>
+            <span>Bestsellers</span> in Category
+          </h1>
+
+          <div className="category-tabs">
+
+            <button className="active-tab">
+              Smartphones
+            </button>
+
+            <button>
+              PC & Components
+            </button>
+
+            <button>
+              Appliances
+            </button>
+
+          </div>
+
+        </div>
+
+        {/* PRODUCTS */}
+
+        <div className="row g-4">
+
+          {products.map((item) => (
+
+            <div
+              className="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
+              key={item.id}
+            >
+
+              <div className="product-card">
+
+                {/* HOVER ICONS */}
+
+                <div className="hover-icons">
+
+                  <div className="icon-box">
+                    <i className="fa-solid fa-scale-balanced"></i>
+                  </div>
+
+                  <div className="icon-box">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </div>
+
+                  <div className="icon-box">
+                    <i className="fa-regular fa-heart"></i>
+                  </div>
+
+                </div>
+
+                {/* IMAGE */}
+
+                <div className="product-image">
+
+                  <img
+                    src={imageMap[item.image]}
+                    alt={item.name}
+                  />
+
+                </div>
+
+                {/* CONTENT */}
+
+                <div className="product-content">
+
+                  <div className="product-top">
+
+                    <span>
+                      {item.category}
+                    </span>
+
+                    <div className="rating">
+
+                      {item.rating}
+
+                      <i className="fa-solid fa-star"></i>
+
+                    </div>
+
+                  </div>
+
+                  <h3>
+                    {item.name}
+                  </h3>
+
+                  {/* COLORS */}
+
+                  <div className="color-wrapper">
+
+                    <span
+                      className="color-circle"
+                      style={{
+                        background: item.color1
+                      }}
+                    ></span>
+
+                    <span
+                      className="color-circle"
+                      style={{
+                        background: item.color2
+                      }}
+                    ></span>
+
+                    <span
+                      className="color-circle"
+                      style={{
+                        background: item.color3
+                      }}
+                    ></span>
+
+                    <span
+                      className="color-circle"
+                      style={{
+                        background: item.color4
+                      }}
+                    ></span>
+
+                  </div>
+
+                  {/* STORAGE */}
+
+                  <div className="storage-wrapper">
+
+                    {item.storage1 && (
+                      <button>
+                        {item.storage1}
+                      </button>
+                    )}
+
+                    {item.storage2 && (
+                      <button>
+                        {item.storage2}
+                      </button>
+                    )}
+
+                  </div>
+
+                </div>
+
+                {/* BOTTOM */}
+
+                <div className="product-bottom">
+
+                  <h2>
+                    ${item.price}.00
+                  </h2>
+
+                  <div className="cart-icon">
+                    <i className="fa-solid fa-cart-shopping"></i>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+        </>
     );
 };
 
