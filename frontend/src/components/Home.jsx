@@ -23,9 +23,28 @@ import phone10 from "../assets/phone10.webp";
 import phone11 from "../assets/phone11.jpg";
 import phone12 from "../assets/phone12.jpg";
 
+import pc1 from "../assets/pc1.jpg";
+import pc2 from "../assets/pc2.jpg";
+import pc3 from "../assets/pc3.jpg";
+import pc4 from "../assets/pc4.jpg";
+import pc5 from "../assets/pc5.jpg";
+import pc6 from "../assets/pc6.jpg";
+
+import appliance1 from "../assets/appliance1.jpg";
+import appliance2 from "../assets/appliance2.jpg";
+import appliance3 from "../assets/appliance3.jpg";
+import appliance4 from "../assets/appliance4.jpg";
+import appliance5 from "../assets/appliance5.jpg";
+import appliance6 from "../assets/appliance6.jpg";
+
+import airpods from "../assets/airpods1.jpg";
+
+
 const Home = () => {
     const [products, setProducts] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("Smartphones");
 
+    const categoryTabs = ["Smartphones", "PC & Components", "Appliances"];
 
     const imageMap = {
         "phone1.webp": iphone15,
@@ -40,27 +59,82 @@ const Home = () => {
         "phone10.webp": phone10,
         "phone11.jpg": phone11,
         "phone12.jpg": phone12,
+        "pc1.jpg": pc1,
+        "pc2.jpg": pc2,
+        "pc3.jpg": pc3,
+        "pc4.jpg": pc4,
+        "pc5.jpg": pc5,
+        "pc6.jpg": pc6,
+        "appliance1.jpg": appliance1,
+        "appliance2.jpg": appliance2,
+        "appliance3.jpg": appliance3,
+        "appliance4.jpg": appliance4,
+        "appliance5.jpg": appliance5,
+        "appliance6.jpg": appliance6,
     };
 
-
-
     useEffect(() => {
-        fetchProducts();
-    }, []);
+        fetchProducts(selectedCategory);
+    }, [selectedCategory]);
 
-    const fetchProducts = async () => {
+    const fetchProducts = async (category = "Smartphones") => {
         try {
-
-            const res = await axios.get(
-                "http://localhost:5000/api/products"
-            );
-
+            const url = `http://localhost:5000/api/products?category=${encodeURIComponent(category)}`;
+            const res = await axios.get(url);
             setProducts(res.data.products);
-
         } catch (error) {
             console.log(error);
         }
     };
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+    };
+
+     const products1 = [
+    {
+      id: 1,
+      name: "Baseus Privity Ring Bracket",
+      price: "$12.00",
+      image: pc1,
+    },
+
+    {
+      id: 2,
+      name: "Belkin Blue Light UltraGlass 2",
+      price: "$44.99",
+      image: appliance1,
+    },
+
+    {
+      id: 3,
+      name: "Nokia G60 5G",
+      price: "$378.00",
+      image: phone11,
+    },
+
+    {
+      id: 4,
+      name: "OtterBox Figura Series Case",
+      price: "$49.95",
+      image: pc5,
+    },
+
+    {
+      id: 5,
+      name: "Poco Honor X9b",
+      price: "$350.00",
+      image: phone10,
+    },
+
+    {
+      id: 6,
+      name: "SanDisk MAX ENDURANCE",
+      price: "$32.00",
+      image: appliance2,
+    },
+  ];
+
     return (
         <>
             <div className="hero-section container-fluid">
@@ -258,19 +332,19 @@ const Home = () => {
                         </h1>
 
                         <div className="category-tabs">
-
-                            <button className="active-tab">
-                                Smartphones
-                            </button>
-
-                            <button>
-                                PC & Components
-                            </button>
-
-                            <button>
-                                Appliances
-                            </button>
-
+                            {categoryTabs.map((category) => (
+                                <button
+                                    key={category}
+                                    className={
+                                        category === selectedCategory
+                                            ? "active-tab"
+                                            : ""
+                                    }
+                                    onClick={() => handleCategoryClick(category)}
+                                >
+                                    {category}
+                                </button>
+                            ))}
                         </div>
 
                     </div>
@@ -339,35 +413,15 @@ const Home = () => {
 
 
                                         <div className="color-wrapper">
-
-                                            <span
-                                                className="color-circle"
-                                                style={{
-                                                    background: item.color1
-                                                }}
-                                            ></span>
-
-                                            <span
-                                                className="color-circle"
-                                                style={{
-                                                    background: item.color2
-                                                }}
-                                            ></span>
-
-                                            <span
-                                                className="color-circle"
-                                                style={{
-                                                    background: item.color3
-                                                }}
-                                            ></span>
-
-                                            <span
-                                                className="color-circle"
-                                                style={{
-                                                    background: item.color4
-                                                }}
-                                            ></span>
-
+                                            {[item.color1, item.color2, item.color3, item.color4]
+                                                .filter(Boolean)
+                                                .map((color, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="color-circle"
+                                                        style={{ background: color }}
+                                                    ></span>
+                                                ))}
                                         </div>
 
 
@@ -413,6 +467,155 @@ const Home = () => {
                 </div>
 
             </section>
+
+            <section className="limited-offer-section">
+
+      <div className="container-fluid">
+
+        {/* TOP BOX */}
+
+        <div className="offer-top-box">
+
+          <div>
+
+            <h2>
+              <span>Limited</span> Offers!
+            </h2>
+
+            <p>
+              Hurry Up To Buy These Products With Discount.
+            </p>
+
+          </div>
+
+
+          <div className="timer-wrapper">
+
+            <div className="time-box">
+              <h3>231</h3>
+              <span>Days</span>
+            </div>
+
+            <div className="time-box">
+              <h3>17</h3>
+              <span>Hr</span>
+            </div>
+
+            <div className="time-box">
+              <h3>26</h3>
+              <span>Min</span>
+            </div>
+
+            <div className="time-box">
+              <h3>30</h3>
+              <span>Sc</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div className="row g-4">
+
+
+          <div className="col-lg-6">
+
+            <div className="airpods-card">
+
+              <h5>Mi Cordless Screwdriver</h5>
+
+              <h1>AirPods Pro 3</h1>
+
+              <button>
+                Shop Now
+              </button>
+
+              <div className="airpods-image">
+
+                <img
+                  src={airpods}
+                  alt=""
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="col-lg-6">
+
+            <div className="row g-4">
+
+              {products1.map((item) => (
+
+                <div
+                  className="col-md-6"
+                  key={item.id}
+                >
+
+                  <div className="small-product-card">
+
+                    <div className="small-product-image">
+
+                      <img
+                        src={item.image}
+                        alt=""
+                      />
+
+                    </div>
+
+                    <div className="small-product-content">
+
+                      <h4>
+                        {item.name}
+                      </h4>
+
+                      <div className="stars">
+
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+
+                      </div>
+
+                      <h5>
+                        {item.price}
+                      </h5>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+
+            <div className="offer-text">
+
+              <p>
+                *Number of products is limited!
+              </p>
+
+              <p>
+                **Promotional products cannot be combined with promotional codes.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
         </>
     );
 };

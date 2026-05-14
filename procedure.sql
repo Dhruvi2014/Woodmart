@@ -190,6 +190,171 @@ VALUES
 '',
 ''
 );
+
+INSERT INTO products
+(name, category, price, rating, image, color1, color2, color3, color4, storage1, storage2)
+VALUES
+(
+'Acer SA100 SATAIII',
+'PC & Components',
+30.00,
+5.0,
+'pc1.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'AMD Radeon Pro W5500',
+'PC & Components',
+480.00,
+4.0,
+'pc2.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'AMD Ryzen 5 5600X',
+'PC & Components',
+250.00,
+4.0,
+'pc3.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'AMD Ryzen 5 7600X',
+'PC & Components',
+299.00,
+5.0,
+'pc4.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'AMD Ryzen 7 5800X',
+'PC & Components',
+370.00,
+4.0,
+'pc5.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'AMD Ryzen 9 7950X',
+'PC & Components',
+699.00,
+4.0,
+'pc6.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+);
+
+INSERT INTO products
+(name, category, price, rating, image, color1, color2, color3, color4, storage1, storage2)
+VALUES
+(
+'ARIETE 0979',
+'Appliances',
+110.00,
+5.0,
+'appliance1.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'ARIETE 986',
+'Appliances',
+150.00,
+4.0,
+'appliance2.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Bamix DeLuxe M200',
+'Appliances',
+230.00,
+4.0,
+'appliance3.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Bamix Luxurylin M200',
+'Appliances',
+605.00,
+5.0,
+'appliance4.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Bosch KUW20VHF0G',
+'Appliances',
+745.00,
+4.0,
+'appliance5.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Bosch MMB6141B',
+'Appliances',
+90.00,
+4.0,
+'appliance6.jpg',
+'',
+'',
+'',
+'',
+'',
+''
+);
+
 DELIMITER $$
 
 CREATE PROCEDURE GetAllProducts()

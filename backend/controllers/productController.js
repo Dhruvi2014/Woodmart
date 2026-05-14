@@ -1,7 +1,11 @@
 const productModel = require("../models/productModel");
 
 const getAllProducts = (req, res) => {
-  productModel.getProducts((err, results) => {
+  const category = req.query.category;
+  console.log('Endpoint URL:', req.originalUrl);
+  console.log('Requested category:', JSON.stringify(category));
+
+  productModel.getProducts(category, (err, results) => {
     if (err) {
       return res.status(500).json({
         success: false,
@@ -11,7 +15,7 @@ const getAllProducts = (req, res) => {
 
     res.status(200).json({
       success: true,
-      products: results[0],
+      products: category ? results : results[0],
     });
   });
 };
