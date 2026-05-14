@@ -24,204 +24,206 @@ import phone11 from "../assets/phone11.jpg";
 import phone12 from "../assets/phone12.jpg";
 
 const Home = () => {
-     const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
 
-  const imageMap = {
-    "phone1.webp": iphone15,
-    "phone2.webp": iphone15plus,
-    "phone3.webp": iphone15pro,
-    "phone4.jpg": iphone15promax,
-    "phone5.webp": iphone17,
-    "phone6.webp": iphone17pro,
-    "phone7.webp": phone7,
-    "phone8.webp": phone8,
-    "phone9.webp": phone9,  
-    "phone10.webp": phone10,
-    "phone11.jpg": phone11,
-    "phone12.jpg": phone12,
-  };
+    const imageMap = {
+        "phone1.webp": iphone15,
+        "phone2.webp": iphone15plus,
+        "phone3.webp": iphone15pro,
+        "phone4.jpg": iphone15promax,
+        "phone5.webp": iphone17,
+        "phone6.webp": iphone17pro,
+        "phone7.webp": phone7,
+        "phone8.webp": phone8,
+        "phone9.webp": phone9,
+        "phone10.webp": phone10,
+        "phone11.jpg": phone11,
+        "phone12.jpg": phone12,
+    };
 
 
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
-  const fetchProducts = async () => {
-    try {
+    const fetchProducts = async () => {
+        try {
 
-      const res = await axios.get(
-        "http://localhost:5000/api/products"
-      );
+            const res = await axios.get(
+                "http://localhost:5000/api/products"
+            );
 
-      setProducts(res.data.products);
+            setProducts(res.data.products);
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <>
-        <div className="hero-section container-fluid">
+            <div className="hero-section container-fluid">
 
-            <div className="row g-4">
+                <div className="row g-4">
 
-                <div className="col-lg-3">
+                    <div className="col-lg-3">
 
-                    <div className="left-sidebar">
+                        <div className="left-sidebar">
 
-                        <div className="category-item">
-                            <i className="fa-solid fa-mobile-screen-button"></i>
-                            <span>Smartphones</span>
+                            <div className="category-item">
+                                <i className="fa-solid fa-mobile-screen-button"></i>
+                                <span>Smartphones</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-laptop"></i>
+                                <span>Laptops, Tablets & PCs</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-memory"></i>
+                                <span>PC Components</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-gamepad"></i>
+                                <span>Gaming</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-blender"></i>
+                                <span>Appliances</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-tv"></i>
+                                <span>TV & Audio</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-house"></i>
+                                <span>Home & Outdoor</span>
+                            </div>
+
+                            <div className="category-item">
+                                <i className="fa-solid fa-camera"></i>
+                                <span>Cameras</span>
+                            </div>
+
+                            <button className="buy-btn">
+                                <i className="fa-solid fa-bolt"></i>
+                                Buy WoodMart
+                            </button>
+
                         </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-laptop"></i>
-                            <span>Laptops, Tablets & PCs</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-memory"></i>
-                            <span>PC Components</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-gamepad"></i>
-                            <span>Gaming</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-blender"></i>
-                            <span>Appliances</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-tv"></i>
-                            <span>TV & Audio</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-house"></i>
-                            <span>Home & Outdoor</span>
-                        </div>
-
-                        <div className="category-item">
-                            <i className="fa-solid fa-camera"></i>
-                            <span>Cameras</span>
-                        </div>
-
-                        <button className="buy-btn">
-                            <i className="fa-solid fa-bolt"></i>
-                            Buy WoodMart
-                        </button>
 
                     </div>
 
-                </div>
+
+                    <div className="col-lg-6">
+
+                        <div className="slider-wrapper">
+
+                            <Carousel
+                                fade
+                                indicators={false}
+                                interval={3000}
+                                prevIcon={
+                                    <span className="custom-arrow">
+                                        <i className="fa-solid fa-chevron-left"></i>
+                                    </span>
+                                }
+                                nextIcon={
+                                    <span className="custom-arrow">
+                                        <i className="fa-solid fa-chevron-right"></i>
+                                    </span>
+                                }
+                            >
 
 
-                <div className="col-lg-6">
+                                <Carousel.Item>
 
-                    <div className="slider-wrapper">
+                                    <div className="slide-content">
 
-                        <Carousel
-                            fade
-                            indicators={false}
-                            interval={3000}
-                            prevIcon={
-                                <span className="custom-arrow">
-                                    <i className="fa-solid fa-chevron-left"></i>
-                                </span>
-                            }
-                            nextIcon={
-                                <span className="custom-arrow">
-                                    <i className="fa-solid fa-chevron-right"></i>
-                                </span>
-                            }
-                        >
+                                        <img src={slide1} alt="" />
+
+                                    </div>
+
+                                </Carousel.Item>
 
 
-                            <Carousel.Item>
+                                <Carousel.Item>
 
-                                <div className="slide-content">
-
-                                    <img src={slide1} alt="" />
-
-                                </div>
-
-                            </Carousel.Item>
+                                    <div className="slide-content">
 
 
-                            <Carousel.Item>
-
-                                <div className="slide-content">
+                                        <img src={slide2} alt="" />
 
 
-                                    <img src={slide2} alt="" />
+                                    </div>
+
+                                </Carousel.Item>
 
 
-                                </div>
+                                <Carousel.Item>
 
-                            </Carousel.Item>
+                                    <div className="slide-content">
+                                        <img src={slide3} alt="" />
 
+                                    </div>
 
-                            <Carousel.Item>
+                                </Carousel.Item>
 
-                                <div className="slide-content">
-                                    <img src={slide3} alt="" />
+                            </Carousel>
 
-                                </div>
-
-                            </Carousel.Item>
-
-                        </Carousel>
+                        </div>
 
                     </div>
 
-                </div>
+                    <div className="col-lg-3">
 
-                <div className="col-lg-3">
+                        <div className="hot-deal-card">
 
-                    <div className="hot-deal-card">
+                            <div className="deal-header">
 
-                        <div className="deal-header">
+                                <div className="deal-title">
+                                    <span className="dot"></span>
+                                    <h3>Hot Deals</h3>
+                                </div>
 
-                            <div className="deal-title">
-                                <span className="dot"></span>
-                                <h3>Hot Deals</h3>
+                                <div className="timer">
+                                    232 : 18 : 37 : 36
+                                </div>
+
                             </div>
 
-                            <div className="timer">
-                                232 : 18 : 37 : 36
-                            </div>
+                            <div className="deal-image">
 
-                        </div>
-
-                        <div className="deal-image">
-
-                            <img src={hotdeal} alt="" />
-
-                        </div>
-
-                        <div className="product-info">
-
-                            <div className="small-images">
                                 <img src={hotdeal} alt="" />
-                                <img src={hotdeal} alt="" />
+
                             </div>
 
-                            <h4>Audioengine A2+BT</h4>
+                            <div className="product-info">
 
-                            <div className="stars">
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
+                                <div className="small-images">
+                                    <img src={hotdeal} alt="" />
+                                    <img src={hotdeal} alt="" />
+                                </div>
+
+                                <h4>Audioengine A2+BT</h4>
+
+                                <div className="stars">
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                </div>
+
+                                <h5>$300.00</h5>
+
                             </div>
-
-                            <h5>$300.00</h5>
 
                         </div>
 
@@ -229,197 +231,188 @@ const Home = () => {
 
                 </div>
 
-            </div>
+                <div className="brands-section">
 
-            <div className="brands-section">
-
-                <div className="brand-box">acer</div>
-                <div className="brand-box">ALOGIC</div>
-                <div className="brand-box">AOC</div>
-                <div className="brand-box"></div>
-                <div className="brand-box">ASUS</div>
-                <div className="brand-box">BenQ</div>
-                <div className="brand-box">BOSE</div>
-
-            </div>
-
-        </div>
-
-
-        <section className="bestseller-section">
-
-      <div className="container-fluid">
-
-
-        <div className="top-header">
-
-          <h1>
-            <span>Bestsellers</span> in Category
-          </h1>
-
-          <div className="category-tabs">
-
-            <button className="active-tab">
-              Smartphones
-            </button>
-
-            <button>
-              PC & Components
-            </button>
-
-            <button>
-              Appliances
-            </button>
-
-          </div>
-
-        </div>
-
-        {/* PRODUCTS */}
-
-        <div className="row g-4">
-
-          {products.map((item) => (
-
-            <div
-              className="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
-              key={item.id}
-            >
-
-              <div className="product-card">
-
-                {/* HOVER ICONS */}
-
-                <div className="hover-icons">
-
-                  <div className="icon-box">
-                    <i className="fa-solid fa-scale-balanced"></i>
-                  </div>
-
-                  <div className="icon-box">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </div>
-
-                  <div className="icon-box">
-                    <i className="fa-regular fa-heart"></i>
-                  </div>
+                    <div className="brand-box">acer</div>
+                    <div className="brand-box">ALOGIC</div>
+                    <div className="brand-box">AOC</div>
+                    <div className="brand-box"></div>
+                    <div className="brand-box">ASUS</div>
+                    <div className="brand-box">BenQ</div>
+                    <div className="brand-box">BOSE</div>
 
                 </div>
 
-                {/* IMAGE */}
+            </div>
 
-                <div className="product-image">
 
-                  <img
-                    src={imageMap[item.image]}
-                    alt={item.name}
-                  />
+            <section className="bestseller-section">
 
-                </div>
+                <div className="container-fluid">
 
-                {/* CONTENT */}
 
-                <div className="product-content">
+                    <div className="top-header">
 
-                  <div className="product-top">
+                        <h1>
+                            <span>Bestsellers</span> in Category
+                        </h1>
 
-                    <span>
-                      {item.category}
-                    </span>
+                        <div className="category-tabs">
 
-                    <div className="rating">
+                            <button className="active-tab">
+                                Smartphones
+                            </button>
 
-                      {item.rating}
+                            <button>
+                                PC & Components
+                            </button>
 
-                      <i className="fa-solid fa-star"></i>
+                            <button>
+                                Appliances
+                            </button>
+
+                        </div>
 
                     </div>
 
-                  </div>
 
-                  <h3>
-                    {item.name}
-                  </h3>
+                    <div className="row g-4">
 
-                  {/* COLORS */}
+                        {products.map((item) => (
 
-                  <div className="color-wrapper">
+                            <div
+                                className="col-xxl-2 col-xl-3 col-lg-4 col-md-6"
+                                key={item.id}
+                            >
 
-                    <span
-                      className="color-circle"
-                      style={{
-                        background: item.color1
-                      }}
-                    ></span>
+                                <div className="product-card">
 
-                    <span
-                      className="color-circle"
-                      style={{
-                        background: item.color2
-                      }}
-                    ></span>
 
-                    <span
-                      className="color-circle"
-                      style={{
-                        background: item.color3
-                      }}
-                    ></span>
+                                    <div className="hover-icons">
 
-                    <span
-                      className="color-circle"
-                      style={{
-                        background: item.color4
-                      }}
-                    ></span>
+                                        <div className="icon-box">
+                                            <i className="fa-solid fa-scale-balanced"></i>
+                                        </div>
 
-                  </div>
+                                        <div className="icon-box">
+                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                        </div>
 
-                  {/* STORAGE */}
+                                        <div className="icon-box">
+                                            <i className="fa-regular fa-heart"></i>
+                                        </div>
 
-                  <div className="storage-wrapper">
+                                    </div>
 
-                    {item.storage1 && (
-                      <button>
-                        {item.storage1}
-                      </button>
-                    )}
 
-                    {item.storage2 && (
-                      <button>
-                        {item.storage2}
-                      </button>
-                    )}
+                                    <div className="product-image">
 
-                  </div>
+                                        <img
+                                            src={imageMap[item.image]}
+                                            alt={item.name}
+                                        />
+
+                                    </div>
+
+
+                                    <div className="product-content">
+
+                                        <div className="product-top">
+
+                                            <span>
+                                                {item.category}
+                                            </span>
+
+                                            <div className="rating">
+
+                                                {item.rating}
+
+                                                <i className="fa-solid fa-star"></i>
+
+                                            </div>
+
+                                        </div>
+
+                                        <h3>
+                                            {item.name}
+                                        </h3>
+
+
+                                        <div className="color-wrapper">
+
+                                            <span
+                                                className="color-circle"
+                                                style={{
+                                                    background: item.color1
+                                                }}
+                                            ></span>
+
+                                            <span
+                                                className="color-circle"
+                                                style={{
+                                                    background: item.color2
+                                                }}
+                                            ></span>
+
+                                            <span
+                                                className="color-circle"
+                                                style={{
+                                                    background: item.color3
+                                                }}
+                                            ></span>
+
+                                            <span
+                                                className="color-circle"
+                                                style={{
+                                                    background: item.color4
+                                                }}
+                                            ></span>
+
+                                        </div>
+
+
+                                        <div className="storage-wrapper">
+
+                                            {item.storage1 && (
+                                                <button>
+                                                    {item.storage1}
+                                                </button>
+                                            )}
+
+                                            {item.storage2 && (
+                                                <button>
+                                                    {item.storage2}
+                                                </button>
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div className="product-bottom">
+
+                                        <h2>
+                                            ${item.price}.00
+                                        </h2>
+
+                                        <div className="cart-icon">
+                                            <i className="fa-solid fa-cart-shopping"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        ))}
+
+                    </div>
 
                 </div>
 
-                {/* BOTTOM */}
-
-                <div className="product-bottom">
-
-                  <h2>
-                    ${item.price}.00
-                  </h2>
-
-                  <div className="cart-icon">
-                    <i className="fa-solid fa-cart-shopping"></i>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </div>
-
-    </section>
+            </section>
         </>
     );
 };
