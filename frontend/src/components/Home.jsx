@@ -46,6 +46,11 @@ import gaming6 from "../assets/gaming6.webp";
 
 import airpods from "../assets/airpods1.jpg";
 
+import article1 from "../assets/gamingpc.jpg";
+import article2 from "../assets/ps5.webp";
+import article3 from "../assets/cleaner.jpg";
+import article4 from "../assets/airtag.jpg";
+import author from "../assets/author.jpg";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -163,6 +168,42 @@ const Home = () => {
         },
     ];
 
+    const articles = [
+        {
+            id: 1,
+            image: article1,
+            day: "17",
+            month: "JUL",
+            category: "REVIEWS",
+            title: "Review of the new MacBook Pro on the powerful M3 chip series",
+        },
+        {
+            id: 2,
+            image: article2,
+            day: "10",
+            month: "JUL",
+            category: "NOVELTY",
+            title: "What’s New in PlayStation 5 Slim and Release Date",
+        },
+        {
+            id: 3,
+            image: article3,
+            day: "03",
+            month: "JUL",
+            category: "REVIEWS",
+            title: "Top 5 Most Powerful Vertical Vacuum Cleaners",
+        },
+        {
+            id: 4,
+            image: article4,
+            day: "27",
+            month: "JUN",
+            category: "ADVICES",
+            title: "How Do I Share Apple AirTag With Other Users?",
+        },
+    ];
+
+
     return (
         <>
             <div className="hero-section container-fluid">
@@ -259,20 +300,16 @@ const Home = () => {
 
                                     <div className="slide-content">
 
-
                                         <img src={slide2} alt="" />
-
 
                                     </div>
 
                                 </Carousel.Item>
 
-
                                 <Carousel.Item>
 
                                     <div className="slide-content">
                                         <img src={slide3} alt="" />
-
                                     </div>
 
                                 </Carousel.Item>
@@ -377,7 +414,6 @@ const Home = () => {
 
                     </div>
 
-
                     <div className="row g-4">
 
                         {products.map((item) => (
@@ -415,7 +451,6 @@ const Home = () => {
                                         />
 
                                     </div>
-
 
                                     <div className="product-content">
 
@@ -562,7 +597,6 @@ const Home = () => {
 
                 <div className="container-fluid">
 
-
                     <div className="offer-top-box">
 
                         <div>
@@ -606,7 +640,6 @@ const Home = () => {
 
 
                     <div className="row g-4">
-
 
                         <div className="col-lg-6">
 
@@ -704,6 +737,125 @@ const Home = () => {
 
                 </div>
 
+            </section>
+
+            <section className="useful-articles-section">
+                <div className="container-fluid px-lg-4 px-3">
+
+                    <div className="articles-header">
+                        <h2>Useful Articles</h2>
+
+                        <button className="all-articles-btn">
+                            All Articles
+                            <i className="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div className="row g-4">
+                        {articles.map((article) => (
+                            <div
+                                className="col-xl-3 col-lg-6 col-md-6"
+                                key={article.id}
+                            >
+                                <div className="article-card">
+
+                                    <div className="article-image-wrapper">
+                                        <img
+                                            src={article.image}
+                                            alt="article"
+                                            className="article-image"
+                                        />
+
+                                        <div className="date-badge">
+                                            <h5>{article.day}</h5>
+                                            <span>{article.month}</span>
+                                        </div>
+
+                                        <div className="category-badge">
+                                            {article.category}
+                                        </div>
+                                    </div>
+
+                                    <div className="article-content">
+                                        <h3>{article.title}</h3>
+
+                                        <div className="article-meta">
+
+                                            <div className="author-info">
+                                                <span>Posted by</span>
+
+                                                <img src={author} alt="author" />
+
+                                                <p>Mr. Mackay</p>
+                                            </div>
+
+                                            <div className="article-icons">
+
+                                                <i className="fa-solid fa-share-nodes"></i>
+
+                                                <div className="comment-box">
+                                                    <i className="fa-regular fa-comment"></i>
+                                                    <span>0</span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <a href="/" className="read-more">
+                                            Continue Reading
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            </section>
+
+            <section className="store-content-section">
+                <div className="container-fluid px-lg-4 px-3">
+
+                    <div className="store-content-wrapper">
+
+                        <h2 className="main-heading">
+                            Online store of household appliances and electronics
+                        </h2>
+
+                        <p className="content-text">
+                            Then the question arises: where’s the content? Not there yet?
+                            That’s not so bad, there’s some dummy copy to the rescue. But
+                            worse, what if the fish doesn’t fit in the can, the foot’s too
+                            big for the boot? Or too small? To short sentences, to many
+                            headings, images too large for the proposed design, or too
+                            small, or they fit in but it looks iffy for reasons.
+                        </p>
+
+                        <h3 className="sub-heading">
+                            Online shopping that really is convenient
+                        </h3>
+
+                        <p className="content-text">
+                            A client that’s unhappy for a reason is a problem, a client
+                            that’s unhappy though he or her can’t quite put a finger on it
+                            is worse. Chances are there wasn’t collaboration,
+                            communication, and checkpoints, there wasn’t a process agreed
+                            upon or specified with the granularity required. It’s content
+                            strategy gone awry right from the start. If that’s what you
+                            think how bout the other way around? How can you evaluate
+                            content without design? No typography, no colors, no layout,
+                            no styles, all those things that convey the important signals
+                            that go beyond the mere textual, hierarchies of information,
+                            weight, emphasis, oblique stresses, priorities, all those
+                            subtle cues that also have visual and emotional appeal to the
+                            reader.
+                        </p>
+
+                    </div>
+
+                </div>
             </section>
         </>
     );
