@@ -355,11 +355,120 @@ VALUES
 ''
 );
 
+INSERT INTO products
+(name, category, price, rating, image, color1, color2, color3, color4, storage1, storage2)
+VALUES
+(
+'Thrustmaster T248 Racing Wheel',
+'Gaming',
+349.00,
+4.5,
+'gaming1.webp',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Sony DualSense Controller',
+'Gaming',
+69.00,
+5.0,
+'gaming2.webp',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Logitech G Pro Wireless Mouse',
+'Gaming',
+149.00,
+4.5,
+'gaming3.webp',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'Razer Huntsman Mini Keyboard',
+'Gaming',
+119.00,
+4.0,
+'gaming4.webp',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'HyperX Cloud II Headset',
+'Gaming',
+99.00,
+4.5,
+'gaming6.webp',
+'',
+'',
+'',
+'',
+'',
+''
+),
+(
+'SteelSeries Apex 7 Mechanical Keyboard',
+'Gaming',
+179.00,
+5.0,
+'gaming5.webp',
+'',
+'',
+'',
+'',
+'',
+''
+);
+
 DELIMITER $$
+
+DROP PROCEDURE IF EXISTS GetAllProducts$$
+DROP PROCEDURE IF EXISTS GetProductsByCategory$$
 
 CREATE PROCEDURE GetAllProducts()
 BEGIN
    SELECT * FROM products;
 END $$
 
+CREATE PROCEDURE GetProductsByCategory(IN category_name VARCHAR(255))
+BEGIN
+   SELECT * FROM products WHERE category = category_name;
+END $$
+
+DROP PROCEDURE IF EXISTS CreateUser$$
+CREATE PROCEDURE CreateUser(IN p_name VARCHAR(255), IN p_email VARCHAR(255), IN p_password VARCHAR(255))
+BEGIN
+    INSERT INTO users (name, email, password) VALUES (p_name, p_email, p_password);
+END $$
+
+DROP PROCEDURE IF EXISTS GetUserByEmail$$
+CREATE PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
+BEGIN
+    SELECT * FROM users WHERE email = p_email;
+END $$
+
 DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);

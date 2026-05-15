@@ -13,9 +13,15 @@ const getAllProducts = (req, res) => {
       });
     }
 
+    const products = Array.isArray(results)
+      ? Array.isArray(results[0])
+        ? results[0]
+        : results
+      : [];
+
     res.status(200).json({
       success: true,
-      products: category ? results : results[0],
+      products,
     });
   });
 };

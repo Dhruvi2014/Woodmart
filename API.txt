@@ -1,0 +1,11 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzc4ODI0MTIxLCJleHAiOjE3ODE0MTYxMjF9.iz2grK4-7lpnc702DFEetg46MT1K4eElgtm-5Oxmh78
+
+http://localhost:5000/api/products -- GET
+
+http://localhost:5000/api/users/register  -- POST
+
+{ "name": "John", "email": "john@example.com", "password": "password123" }
+
+http://localhost:5000/api/users/login  -- POST
+
+{ "email": "john@example.com", "password": "password123" }

@@ -37,11 +37,19 @@ import appliance4 from "../assets/appliance4.jpg";
 import appliance5 from "../assets/appliance5.jpg";
 import appliance6 from "../assets/appliance6.jpg";
 
+import gaming1 from "../assets/gaming1.webp";
+import gaming2 from "../assets/gaming2.webp";
+import gaming3 from "../assets/gaming3.webp";
+import gaming4 from "../assets/gaming4.webp";
+import gaming5 from "../assets/gaming5.webp";
+import gaming6 from "../assets/gaming6.webp";
+
 import airpods from "../assets/airpods1.jpg";
 
 
 const Home = () => {
     const [products, setProducts] = useState([]);
+    const [gamingProducts, setGamingProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("Smartphones");
 
     const categoryTabs = ["Smartphones", "PC & Components", "Appliances"];
@@ -71,11 +79,21 @@ const Home = () => {
         "appliance4.jpg": appliance4,
         "appliance5.jpg": appliance5,
         "appliance6.jpg": appliance6,
+        "gaming1.webp": gaming1,
+        "gaming2.webp": gaming2,
+        "gaming3.webp": gaming3,
+        "gaming4.webp": gaming4,
+        "gaming5.webp": gaming5,
+        "gaming6.webp": gaming6,
     };
 
     useEffect(() => {
         fetchProducts(selectedCategory);
     }, [selectedCategory]);
+
+    useEffect(() => {
+        fetchGamingProducts();
+    }, []);
 
     const fetchProducts = async (category = "Smartphones") => {
         try {
@@ -87,53 +105,63 @@ const Home = () => {
         }
     };
 
+    const fetchGamingProducts = async () => {
+        try {
+            const url = `http://localhost:5000/api/products?category=${encodeURIComponent("Gaming")}`;
+            const res = await axios.get(url);
+            setGamingProducts(res.data.products);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const handleCategoryClick = (category) => {
         setSelectedCategory(category);
     };
 
-     const products1 = [
-    {
-      id: 1,
-      name: "Baseus Privity Ring Bracket",
-      price: "$12.00",
-      image: pc1,
-    },
+    const products1 = [
+        {
+            id: 1,
+            name: "Baseus Privity Ring Bracket",
+            price: "$12.00",
+            image: pc1,
+        },
 
-    {
-      id: 2,
-      name: "Belkin Blue Light UltraGlass 2",
-      price: "$44.99",
-      image: appliance1,
-    },
+        {
+            id: 2,
+            name: "Belkin Blue Light UltraGlass 2",
+            price: "$44.99",
+            image: appliance1,
+        },
 
-    {
-      id: 3,
-      name: "Nokia G60 5G",
-      price: "$378.00",
-      image: phone11,
-    },
+        {
+            id: 3,
+            name: "Nokia G60 5G",
+            price: "$378.00",
+            image: phone11,
+        },
 
-    {
-      id: 4,
-      name: "OtterBox Figura Series Case",
-      price: "$49.95",
-      image: pc5,
-    },
+        {
+            id: 4,
+            name: "OtterBox Figura Series Case",
+            price: "$49.95",
+            image: pc5,
+        },
 
-    {
-      id: 5,
-      name: "Poco Honor X9b",
-      price: "$350.00",
-      image: phone10,
-    },
+        {
+            id: 5,
+            name: "Poco Honor X9b",
+            price: "$350.00",
+            image: phone10,
+        },
 
-    {
-      id: 6,
-      name: "SanDisk MAX ENDURANCE",
-      price: "$32.00",
-      image: appliance2,
-    },
-  ];
+        {
+            id: 6,
+            name: "SanDisk MAX ENDURANCE",
+            price: "$32.00",
+            image: appliance2,
+        },
+    ];
 
     return (
         <>
@@ -468,154 +496,215 @@ const Home = () => {
 
             </section>
 
+            <section className="gaming-section py-5">
+                <div className="container-fluid">
+                    <div className="top-header">
+                        <h1>
+                            <span>Gaming</span> Essentials
+                        </h1>
+                        <p className="gaming-description">
+                            Top gaming picks from the backend API, with hover actions for quick preview, wishlist, and compare.
+                        </p>
+                    </div>
+                    <div className="row g-4">
+                        {gamingProducts.map((item) => (
+                            <div className="col-xxl-2 col-xl-3 col-lg-4 col-md-6" key={item.id}>
+                                <div className="product-card">
+                                    <div className="hover-icons">
+                                        <div className="icon-box">
+                                            <i className="fa-solid fa-scale-balanced"></i>
+                                        </div>
+                                        <div className="icon-box">
+                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                        </div>
+                                        <div className="icon-box">
+                                            <i className="fa-regular fa-heart"></i>
+                                        </div>
+                                    </div>
+                                    <div className="product-image">
+                                        <img src={imageMap[item.image]} alt={item.name} />
+                                    </div>
+                                    <div className="product-content">
+                                        <div className="product-top">
+                                            <span>{item.category}</span>
+                                            <div className="rating">
+                                                {item.rating}
+                                                <i className="fa-solid fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <h3>{item.name}</h3>
+                                        <div className="color-wrapper">
+                                            {[item.color1, item.color2, item.color3, item.color4]
+                                                .filter(Boolean)
+                                                .map((color, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="color-circle"
+                                                        style={{ background: color }}
+                                                    ></span>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <div className="product-bottom">
+                                        <h2>${Number(item.price).toFixed(2)}</h2>
+                                        <div className="cart-icon">
+                                            <i className="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <section className="limited-offer-section">
 
-      <div className="container-fluid">
-
-        {/* TOP BOX */}
-
-        <div className="offer-top-box">
-
-          <div>
-
-            <h2>
-              <span>Limited</span> Offers!
-            </h2>
-
-            <p>
-              Hurry Up To Buy These Products With Discount.
-            </p>
-
-          </div>
+                <div className="container-fluid">
 
 
-          <div className="timer-wrapper">
+                    <div className="offer-top-box">
 
-            <div className="time-box">
-              <h3>231</h3>
-              <span>Days</span>
-            </div>
+                        <div>
 
-            <div className="time-box">
-              <h3>17</h3>
-              <span>Hr</span>
-            </div>
+                            <h2>
+                                <span>Limited</span> Offers!
+                            </h2>
 
-            <div className="time-box">
-              <h3>26</h3>
-              <span>Min</span>
-            </div>
+                            <p>
+                                Hurry Up To Buy These Products With Discount.
+                            </p>
 
-            <div className="time-box">
-              <h3>30</h3>
-              <span>Sc</span>
-            </div>
-
-          </div>
-
-        </div>
+                        </div>
 
 
-        <div className="row g-4">
+                        <div className="timer-wrapper">
 
+                            <div className="time-box">
+                                <h3>231</h3>
+                                <span>Days</span>
+                            </div>
 
-          <div className="col-lg-6">
+                            <div className="time-box">
+                                <h3>17</h3>
+                                <span>Hr</span>
+                            </div>
 
-            <div className="airpods-card">
+                            <div className="time-box">
+                                <h3>26</h3>
+                                <span>Min</span>
+                            </div>
 
-              <h5>Mi Cordless Screwdriver</h5>
+                            <div className="time-box">
+                                <h3>30</h3>
+                                <span>Sc</span>
+                            </div>
 
-              <h1>AirPods Pro 3</h1>
-
-              <button>
-                Shop Now
-              </button>
-
-              <div className="airpods-image">
-
-                <img
-                  src={airpods}
-                  alt=""
-                />
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="col-lg-6">
-
-            <div className="row g-4">
-
-              {products1.map((item) => (
-
-                <div
-                  className="col-md-6"
-                  key={item.id}
-                >
-
-                  <div className="small-product-card">
-
-                    <div className="small-product-image">
-
-                      <img
-                        src={item.image}
-                        alt=""
-                      />
+                        </div>
 
                     </div>
 
-                    <div className="small-product-content">
 
-                      <h4>
-                        {item.name}
-                      </h4>
+                    <div className="row g-4">
 
-                      <div className="stars">
 
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
+                        <div className="col-lg-6">
 
-                      </div>
+                            <div className="airpods-card">
 
-                      <h5>
-                        {item.price}
-                      </h5>
+                                <h5>Mi Cordless Screwdriver</h5>
+
+                                <h1>AirPods Pro 3</h1>
+
+                                <button>
+                                    Shop Now
+                                </button>
+
+                                <div className="airpods-image">
+
+                                    <img
+                                        src={airpods}
+                                        alt=""
+                                    />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div className="col-lg-6">
+
+                            <div className="row g-4">
+
+                                {products1.map((item) => (
+
+                                    <div
+                                        className="col-md-6"
+                                        key={item.id}
+                                    >
+
+                                        <div className="small-product-card">
+
+                                            <div className="small-product-image">
+
+                                                <img
+                                                    src={item.image}
+                                                    alt=""
+                                                />
+
+                                            </div>
+
+                                            <div className="small-product-content">
+
+                                                <h4>
+                                                    {item.name}
+                                                </h4>
+
+                                                <div className="stars">
+
+                                                    <i className="fa-solid fa-star"></i>
+                                                    <i className="fa-solid fa-star"></i>
+                                                    <i className="fa-solid fa-star"></i>
+                                                    <i className="fa-solid fa-star"></i>
+                                                    <i className="fa-solid fa-star"></i>
+
+                                                </div>
+
+                                                <h5>
+                                                    {item.price}
+                                                </h5>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                ))}
+
+                            </div>
+
+
+                            <div className="offer-text">
+
+                                <p>
+                                    *Number of products is limited!
+                                </p>
+
+                                <p>
+                                    **Promotional products cannot be combined with promotional codes.
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </div>
-
-                  </div>
 
                 </div>
 
-              ))}
-
-            </div>
-
-
-            <div className="offer-text">
-
-              <p>
-                *Number of products is limited!
-              </p>
-
-              <p>
-                **Promotional products cannot be combined with promotional codes.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+            </section>
         </>
     );
 };

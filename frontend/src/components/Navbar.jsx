@@ -1,7 +1,25 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../Style.css";
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    let user = null;
+    try {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            user = JSON.parse(storedUser);
+        }
+    } catch (e) {
+        console.error("Failed to parse user from localStorage", e);
+        localStorage.removeItem("user");
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
     return (
         <>
             <div className="top-header">
@@ -56,9 +74,22 @@ const Navbar = () => {
 
                         <div className="nav-icons">
 
-                            <div className="icon-circle">
-                                <i className="fa-regular fa-user"></i>
-                            </div>
+                            {user ? (
+                                <div className="icon-circle dropdown">
+                                    <Link to="#" className="text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="fa-regular fa-user"></i>
+                                    </Link>
+                                    <ul className="dropdown-menu dropdown-menu-end shadow">
+                                        <li><span className="dropdown-item-text fw-bold">Hello, {user.name}</span></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                                    </ul>
+                                </div>
+                            ) : (
+                                <div className="icon-circle" onClick={() => navigate('/signup')} style={{ cursor: 'pointer' }}>
+                                    <i className="fa-regular fa-user text-dark"></i>
+                                </div>
+                            )}
 
                             <div className="icon-circle position-relative">
                                 <i className="fa-solid fa-scale-balanced"></i>

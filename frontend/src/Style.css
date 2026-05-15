@@ -548,6 +548,33 @@
     overflow: hidden;
 }
 
+.gaming-section {
+    padding: 35px 18px;
+    background: #f9f8ff;
+}
+
+.gaming-section .top-header {
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.gaming-section h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.gaming-description {
+    color: #5f5f84;
+    font-size: 16px;
+    max-width: 620px;
+}
+
+@media(max-width: 768px) {
+    .gaming-section h1 {
+        font-size: 30px;
+    }
+}
+
 
 .top-header {
     display: flex;
