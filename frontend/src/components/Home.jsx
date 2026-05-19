@@ -295,7 +295,6 @@ const Home = () => {
 
                                 </Carousel.Item>
 
-
                                 <Carousel.Item>
 
                                     <div className="slide-content">
