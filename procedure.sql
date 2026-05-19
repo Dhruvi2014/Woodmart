@@ -474,3 +474,35 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 select * from users;
+
+-- Compare items table and stored procedures
+CREATE TABLE IF NOT EXISTS compare_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_product (product_id)
+);
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS AddToCompare$$
+CREATE PROCEDURE AddToCompare(IN p_product_id INT)
+BEGIN
+    INSERT IGNORE INTO compare_items (product_id) VALUES (p_product_id);
+END $$
+
+DROP PROCEDURE IF EXISTS GetCompare$$
+CREATE PROCEDURE GetCompare()
+BEGIN
+    SELECT p.* FROM compare_items c JOIN products p ON p.id = c.product_id ORDER BY c.created_at DESC;
+END $$
+
+DROP PROCEDURE IF EXISTS RemoveFromCompare$$
+CREATE PROCEDURE RemoveFromCompare(IN p_product_id INT)
+BEGIN
+    DELETE FROM compare_items WHERE product_id = p_product_id;
+END $$
+
+DELIMITER ;
+
+-- End compare procedures

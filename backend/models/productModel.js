@@ -27,3 +27,12 @@ const getProducts = (category, callback) => {
 module.exports = {
   getProducts,
 };
+
+const getProductById = (id, callback) => {
+  db.query("SELECT * FROM products WHERE id = ?", [id], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results && results[0] ? results[0] : null);
+  });
+};
+
+module.exports.getProductById = getProductById;

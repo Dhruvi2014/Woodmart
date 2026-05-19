@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE } from "../api";
 import "../Style.css";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [compareCount, setCompareCount] = useState(0);
     let user = null;
     try {
         const storedUser = localStorage.getItem("user");
@@ -20,6 +22,25 @@ const Navbar = () => {
         localStorage.removeItem("token");
         navigate("/login");
     };
+    useEffect(() => {
+        const fetchCompare = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/compare`);
+                const data = await res.json();
+                if (data && data.products) setCompareCount(data.products.length);
+            } catch (e) {
+                console.error('Failed to fetch compare count', e);
+            }
+        };
+        fetchCompare();
+
+        const onUpdate = (e) => {
+            const v = e && e.detail ? e.detail : parseInt(localStorage.getItem('compareCount') || '0');
+            setCompareCount(Number(v || 0));
+        };
+        window.addEventListener('compareUpdated', onUpdate);
+        return () => window.removeEventListener('compareUpdated', onUpdate);
+    }, []);
     return (
         <>
             <div className="top-header">
@@ -91,9 +112,9 @@ const Navbar = () => {
                                 </div>
                             )}
 
-                            <div className="icon-circle position-relative">
+                            <div className="icon-circle position-relative" style={{cursor: 'pointer'}} onClick={() => navigate('/compare')}>
                                 <i className="fa-solid fa-scale-balanced"></i>
-                                <span className="count-badge">0</span>
+                                <span className="count-badge">{compareCount}</span>
                             </div>
 
                             <div className="icon-circle position-relative">

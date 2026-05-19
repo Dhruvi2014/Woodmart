@@ -26,6 +26,16 @@ const getAllProducts = (req, res) => {
   });
 };
 
+const getProductById = (req, res) => {
+  const id = req.params.id;
+  productModel.getProductById(id, (err, product) => {
+    if (err) return res.status(500).json({ success: false, message: err.message });
+    if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+    res.status(200).json({ success: true, product });
+  });
+};
+
 module.exports = {
   getAllProducts,
+  getProductById,
 };

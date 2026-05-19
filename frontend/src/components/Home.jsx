@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../Style.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../api";
+import { imageMap } from "../imageMap";
 
 import Carousel from "react-bootstrap/Carousel";
 
@@ -56,41 +59,31 @@ const Home = () => {
     const [products, setProducts] = useState([]);
     const [gamingProducts, setGamingProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("Smartphones");
+    const navigate = useNavigate();
 
     const categoryTabs = ["Smartphones", "PC & Components", "Appliances"];
-
-    const imageMap = {
-        "phone1.webp": iphone15,
-        "phone2.webp": iphone15plus,
-        "phone3.webp": iphone15pro,
-        "phone4.jpg": iphone15promax,
-        "phone5.webp": iphone17,
-        "phone6.webp": iphone17pro,
-        "phone7.webp": phone7,
-        "phone8.webp": phone8,
-        "phone9.webp": phone9,
-        "phone10.webp": phone10,
-        "phone11.jpg": phone11,
-        "phone12.jpg": phone12,
-        "pc1.jpg": pc1,
-        "pc2.jpg": pc2,
-        "pc3.jpg": pc3,
-        "pc4.jpg": pc4,
-        "pc5.jpg": pc5,
-        "pc6.jpg": pc6,
-        "appliance1.jpg": appliance1,
-        "appliance2.jpg": appliance2,
-        "appliance3.jpg": appliance3,
-        "appliance4.jpg": appliance4,
-        "appliance5.jpg": appliance5,
-        "appliance6.jpg": appliance6,
-        "gaming1.webp": gaming1,
-        "gaming2.webp": gaming2,
-        "gaming3.webp": gaming3,
-        "gaming4.webp": gaming4,
-        "gaming5.webp": gaming5,
-        "gaming6.webp": gaming6,
+    const addToCompare = async (productId) => {
+        try {
+            const res = await fetch(`${API_BASE}/api/compare`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId })
+            });
+            if (res.ok) {
+                const prev = parseInt(localStorage.getItem('compareCount') || '0');
+                const next = prev + 1;
+                localStorage.setItem('compareCount', String(next));
+                window.dispatchEvent(new CustomEvent('compareUpdated', { detail: next }));
+                navigate('/compare');
+            } else {
+                console.error('Failed to add to compare');
+            }
+        } catch (e) {
+            console.error('Add to compare error', e);
+        }
     };
+
+
 
     useEffect(() => {
         fetchProducts(selectedCategory);
@@ -428,7 +421,7 @@ const Home = () => {
                                     <div className="hover-icons">
 
                                         <div className="icon-box">
-                                            <i className="fa-solid fa-scale-balanced"></i>
+                                            <i className="fa-solid fa-scale-balanced" style={{ cursor: 'pointer' }} onClick={() => addToCompare(item.id)}></i>
                                         </div>
 
                                         <div className="icon-box">
@@ -447,6 +440,8 @@ const Home = () => {
                                         <img
                                             src={imageMap[item.image]}
                                             alt={item.name}
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => navigate(`/product/${item.id}`)}
                                         />
 
                                     </div>
@@ -470,7 +465,7 @@ const Home = () => {
                                         </div>
 
                                         <h3>
-                                            {item.name}
+                                            <span style={{ cursor: 'pointer' }} onClick={() => navigate(`/product/${item.id}`)}>{item.name}</span>
                                         </h3>
 
 
